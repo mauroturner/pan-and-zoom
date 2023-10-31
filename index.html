@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visor dep lanos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <style>
+        .cadContainer{
+            width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .plano{
+            width: 2000px;
+            height: 2000px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <div class="container">
+        <h1>Esta es una prueba de contenido</h1>
+        <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, a neque harum, rerum eius quisquam temporibus tenetur quas nulla saepe vel excepturi, similique vitae repellendus suscipit deleniti inventore magnam omnis.</p>
+        <div class="controles">
+            <!-- Componente de checkbox para "Veredas" -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="veredasCheckbox" checked>
+                <label class="form-check-label" for="veredasCheckbox">Veredas</label>
+            </div>
+
+            <!-- Componente de checkbox para "Muros" -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="murosCheckbox" checked>
+                <label class="form-check-label" for="murosCheckbox">Muros</label>
+            </div>
+
+            <!-- Componente de checkbox para "Ventanas" -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="ventanasCheckbox" checked>
+                <label class="form-check-label" for="ventanasCheckbox">Ventanas</label>
+            </div>
+
+            <!-- Componente de checkbox para "Puertas" -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="puertasCheckbox" checked>
+                <label class="form-check-label" for="puertasCheckbox">Puertas</label>
+            </div>
+
+            <!-- Componente de checkbox para "Ventilación" -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="ventilacionCheckbox" checked>
+                <label class="form-check-label" for="ventilacionCheckbox">Ventilación</label>
+            </div>
+
+            <!-- Componente de checkbox para "Gas" -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="gasCheckbox" checked>
+                <label class="form-check-label" for="gasCheckbox">Gas</label>
+            </div>
+
+            <!-- Componente de checkbox para "Texto" -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="textoCheckbox" checked>
+                <label class="form-check-label" for="textoCheckbox">Texto</label>
+            </div>
+        </div>
+    </div>
+    <div class="container border">
+        <div class="cadContainer" id="cadContainer">
+            <img class="plano" src="./src/planos/veredas_kospi.svg" alt="Plano interactivo" id="veredas" usemap="#veredas">
+            <img class="plano" src="./src/planos/muros_kospi.svg" alt="Plano interactivo" id="muros" usemap="#muros">
+            <img class="plano" src="./src/planos/ventanas_kospi.svg" alt="Plano interactivo" id="ventanas" usemap="#ventanas">
+            <img class="plano" src="./src/planos/puertas_kospi.svg" alt="Plano interactivo" id="puertas" usemap="#puertas">
+            <img class="plano" src="./src/planos/ventilacion_kospi.svg" alt="Plano interactivo" id="ventilacion" usemap="#ventilacion">
+            <img class="plano" src="./src/planos/gas_kospi.svg" alt="Plano interactivo" id="gas" usemap="#gas">
+            <img class="plano" src="./src/planos/texto_kospi.svg" alt="Plano interactivo" id="texto" usemap="#texto">
+            <div class="bg-danger" style="position: absolute; width: 25px; height: 25px; top: 1180px; left: 438px;" id="veredasArea"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, a neque harum, rerum eius quisquam temporibus tenetur quas nulla saepe vel excepturi, similique vitae repellendus suscipit deleniti inventore magnam omnis.</p>
+        <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, a neque harum, rerum eius quisquam temporibus tenetur quas nulla saepe vel excepturi, similique vitae repellendus suscipit deleniti inventore magnam omnis.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+    <script>
+        const elem = document.getElementById('cadContainer')
+        const panzoom = Panzoom(elem, {
+            maxScale: 5
+        })
+        panzoom.zoom(0.3, { animate: true })
+        elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
+
+        const checkboxes = document.querySelectorAll(".form-check-input");
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", function() {
+                const elementId = this.id.replace("Checkbox", "");
+                const element = document.getElementById(elementId);
+                console.log(element);
+                if (element) {
+                    if (this.checked) {
+                        element.classList.remove("d-none");
+                    } else {
+                        element.classList.add("d-none");
+                    }
+                }
+            });
+        });
+
+    // Obtén el área de mapa por su ID
+    const veredasArea = document.getElementById("veredasArea");
+
+    // Agrega un evento de clic al área de mapa
+    veredasArea.addEventListener("click", function() {
+        alert("Información de las puertas...");
+    });
+    </script>
+</body>
+</html>
